@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  servicio-nodejs:
+    image: tp2/node
+    ports:
+      - "8090:3000"
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 3  
+
+  mysql:
+    image: tp2/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root1
+    ports:
+      - "3306:3306"
+    networks:
+        - mynetwork
+    deploy:
+      replicas: 1 
+
+  servicio-apache:
+    image: tp2/php
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 2  
+
+networks:
+  mynetwork:
